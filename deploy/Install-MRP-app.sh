@@ -59,6 +59,11 @@ wget ${AzureResource}mrp.war -P /var/lib/partsunlimited/
 sleep 10
 
 # Copy WAR file to Tomcat directory for auto-deployment
+/etc/init.d/tomcat7 stop
+
+sleep 5
+
+rm -rf /var/lib/tomcat7/webapps/mrp*
 cp /var/lib/partsunlimited/mrp.war /var/lib/tomcat7/webapps
 
 # Restart Tomcat
