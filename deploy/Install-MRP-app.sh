@@ -18,7 +18,7 @@ shift #past argument or value
 done
 
 # Kill java to stop current website
-pkill -9 'java'
+sudo pkill -9 'java'
 
 # Remove old artifacts
 sudo rm -f /var/lib/partsunlimited/MongoRecords.js*
@@ -26,12 +26,12 @@ sudo rm -f /var/lib/partsunlimited/mrp.war*
 sudo rm -f /var/lib/partsunlimited/ordering-service-0.1.0.jar*
 
 # Install packages
-apt-get update
-apt-get install openjdk-8-jdk -y
-apt-get install openjdk-8-jre -y
-apt-get install mongodb -y
-apt-get install tomcat7 -y
-apt-get install wget -y
+sudo apt-get update
+sudo apt-get install openjdk-8-jdk -y
+sudo apt-get install openjdk-8-jre -y
+sudo apt-get install mongodb -y
+sudo apt-get install tomcat7 -y
+sudo apt-get install wget -y
 
 # Set Java environment variables
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
@@ -41,7 +41,7 @@ export PATH=$PATH:/usr/lib/jvm/java-8-openjdk-amd64/bin
 AzureResource="https://$DropStorageAccountName.blob.core.windows.net/$DropContainerName/"
 
 # Download MongoRecords.js from Azure blog storage
-wget ${AzureResource}MongoRecords.js -P /var/lib/partsunlimited
+sudo wget ${AzureResource}MongoRecords.js -P /var/lib/partsunlimited
 
 # Wait for 10 seconds to make sure previous step is completed
 sleep 10
@@ -50,10 +50,10 @@ sleep 10
 mongo ordering /var/lib/partsunlimited/MongoRecords.js
 
 # Change Tomcat listening port from 8080 to 9080
-sed -i s/8080/9080/g /etc/tomcat7/server.xml
+sudo sed -i s/8080/9080/g /etc/tomcat7/server.xml
 
 # Download the client WAR file
-wget ${AzureResource}mrp.war -P /var/lib/partsunlimited/
+sudo wget ${AzureResource}mrp.war -P /var/lib/partsunlimited/
 
 # Wait for 10 seconds to make sure previous step is completed
 sleep 10
@@ -70,12 +70,12 @@ sudo cp /var/lib/partsunlimited/mrp.war /var/lib/tomcat7/webapps
 sudo /etc/init.d/tomcat7 restart
 
 # Download the Ordering Service jar from Azure storage
-wget ${AzureResource}ordering-service-0.1.0.jar -P /var/lib/partsunlimited/
+sudo wget ${AzureResource}ordering-service-0.1.0.jar -P /var/lib/partsunlimited/
 
 # Wait for 20 seconds to make sure previous step is completed
 sleep 20
 
 # Run Ordering Service app
-java -jar /var/lib/partsunlimited/ordering-service-0.1.0.jar &
+sudo java -jar /var/lib/partsunlimited/ordering-service-0.1.0.jar &
 
 echo "MRP application successfully deployed. Go to http://$HOSTNAME.cloudapp.net:9080/mrp"
