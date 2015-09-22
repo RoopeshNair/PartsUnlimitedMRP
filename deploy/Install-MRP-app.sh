@@ -21,9 +21,9 @@ done
 pkill -9 'java'
 
 # Remove old artifacts
-rm -f /var/lib/partsunlimited/MongoRecords.js*
-rm -f /var/lib/partsunlimited/mrp.war*
-rm -f /var/lib/partsunlimited/ordering-service-0.1.0.jar*
+sudo rm -f /var/lib/partsunlimited/MongoRecords.js*
+sudo rm -f /var/lib/partsunlimited/mrp.war*
+sudo rm -f /var/lib/partsunlimited/ordering-service-0.1.0.jar*
 
 # Install packages
 apt-get update
@@ -59,15 +59,15 @@ wget ${AzureResource}mrp.war -P /var/lib/partsunlimited/
 sleep 10
 
 # Copy WAR file to Tomcat directory for auto-deployment
-/etc/init.d/tomcat7 stop
+sudo /etc/init.d/tomcat7 stop
 
 sleep 5
 
-rm -rf /var/lib/tomcat7/webapps/mrp*
-cp /var/lib/partsunlimited/mrp.war /var/lib/tomcat7/webapps
+sudo rm -rf /var/lib/tomcat7/webapps/mrp*
+sudo cp /var/lib/partsunlimited/mrp.war /var/lib/tomcat7/webapps
 
 # Restart Tomcat
-/etc/init.d/tomcat7 restart
+sudo /etc/init.d/tomcat7 restart
 
 # Download the Ordering Service jar from Azure storage
 wget ${AzureResource}ordering-service-0.1.0.jar -P /var/lib/partsunlimited/
