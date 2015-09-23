@@ -42,6 +42,15 @@ echo DROP FOLDER		= "${DROPFOLDER}"
 echo SOURCES FOLDER		= "${SOURCESFOLDER}"
 echo VIRTUAL MACHINE		= "${VIRTUALMACHINE}"
 
+# Delete previous blobs Usage: storage blob delete [options] [container] [blob]
+azure storage blob delete -q -a "${STORAGEACCOUNT}" -k "${STORAGEKEY}" "${CONTAINER}" "integration-service-0.1.0.jar"
+azure storage blob delete -q -a "${STORAGEACCOUNT}" -k "${STORAGEKEY}" "${CONTAINER}" "ordering-service-0.1.0.jar"
+azure storage blob delete -q -a "${STORAGEACCOUNT}" -k "${STORAGEKEY}" "${CONTAINER}" "mrp.war"
+azure storage blob delete -q -a "${STORAGEACCOUNT}" -k "${STORAGEKEY}" "${CONTAINER}" "MongoRecords.js"
+azure storage blob delete -q -a "${STORAGEACCOUNT}" -k "${STORAGEKEY}" "${CONTAINER}" "Install-MRP-app.sh"
+
+echo "Deleted prior artifact version from " "${CONTAINER}"
+
 # Upload necessary files to blob storage
 azure storage blob upload -q -a "${STORAGEACCOUNT}" -k "${STORAGEKEY}" "${DROPFOLDER}/drop/Backend/IntegrationService/build/libs/integration-service-0.1.0.jar" "${CONTAINER}"
 azure storage blob upload -q -a "${STORAGEACCOUNT}" -k "${STORAGEKEY}" "${DROPFOLDER}/drop/Backend/OrderService/build/libs/ordering-service-0.1.0.jar" "${CONTAINER}"
