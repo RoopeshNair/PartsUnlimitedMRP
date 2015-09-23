@@ -58,11 +58,11 @@ azure storage blob upload -q -a "${STORAGEACCOUNT}" -k "${STORAGEKEY}" "${DROPFO
 azure storage blob upload -q -a "${STORAGEACCOUNT}" -k "${STORAGEKEY}" "${SOURCESFOLDER}/deploy/MongoRecords.js" "${CONTAINER}"
 azure storage blob upload -q -a "${STORAGEACCOUNT}" -k "${STORAGEKEY}" "${SOURCESFOLDER}/deploy/Install-MRP-app.sh" "${CONTAINER}"
 
+curl.exe -T "${DROPFOLDER}/drop/Clients/build/lib/mrp.war" "http://pumrpvm1.cloudapp.net:9080/manager/text/deploy?path=/mrp&update=true" -u tomcat:P2ssw0rd
+
 # Use CustomScriptForLinux extension to deploy the app on VM
 SCRIPTURI="https://$STORAGEACCOUNT.blob.core.windows.net/$CONTAINER/Install-MRP-app.sh"
 echo SCRIPT URI 		= "${SCRIPTURI}"
 azure vm extension set -u "${VIRTUALMACHINE}" CustomScriptForLinux Microsoft.OSTCExtensions 1.*
-
-sleep 10
 
 azure vm extension set -v "${VIRTUALMACHINE}" CustomScriptForLinux Microsoft.OSTCExtensions 1.* -i '{"fileUris":["'$SCRIPTURI'"], "commandToExecute": "sudo bash 'Install-MRP-app.sh' -a '${STORAGEACCOUNT}' -c '${CONTAINER}'"}'
