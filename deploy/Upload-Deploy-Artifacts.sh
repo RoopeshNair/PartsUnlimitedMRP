@@ -53,4 +53,4 @@ azure storage blob upload -q -a "${STORAGEACCOUNT}" -k "${STORAGEKEY}" "${SOURCE
 SCRIPTURI="https://$STORAGEACCOUNT.blob.core.windows.net/$CONTAINER/Install-MRP-app.sh"
 echo SCRIPT URI 		= "${SCRIPTURI}"
 azure vm extension set -u "${VIRTUALMACHINE}" CustomScriptForLinux Microsoft.OSTCExtensions 1.*
-azure vm extension set "${VIRTUALMACHINE}" CustomScriptForLinux Microsoft.OSTCExtensions 1.* -i '{"fileUris":["'$SCRIPTURI'"], "commandToExecute": "sudo bash 'Install-MRP-app.sh' -a '${STORAGEACCOUNT}' -c '${CONTAINER}'"}'
+azure vm extension set -vv "${VIRTUALMACHINE}" CustomScriptForLinux Microsoft.OSTCExtensions 1.* -i '{"fileUris":["'$SCRIPTURI'"], "commandToExecute": "sudo bash 'Install-MRP-app.sh' -a '${STORAGEACCOUNT}' -c '${CONTAINER}'"}'
