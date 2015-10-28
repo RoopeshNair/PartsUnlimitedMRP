@@ -2,17 +2,19 @@
 
 # Set globals here before running the script
 # Important: StorageAccountName should be lowercase
-PublishSettingsFileLocation=""
-SubscriptionName=""
-AzureLocation=""
-StorageAccountName=""
-ContainerName=""
-CloudSvcName=""
-VirtualNetwork=""
-VSubNet=""
-LocalAdmin=""
-LocalPass=""
-LinuxVMName=""
+PublishSettingsFileLocation="/home/myadmin/AzureSub.publishsettings"
+SubscriptionName="RMPM"
+AzureLocation="West US"
+StorageAccountName="pumrpst"
+ContainerName="pumrpcn"
+CloudSvcName="pumrprg"
+VirtualNetwork="pumrpvn"
+VSubNet="pumrpvsn"
+LocalAdmin="myadmin"
+LocalPass="Microsoft1!"
+LinuxVMName="pumrpvm1"
+
+
 
 # Add Azure account
 azure account import $PublishSettingsFileLocation
