@@ -45,6 +45,7 @@ echo CONTAINER			= "${CONTAINER}"
 echo DROP FOLDER		= "${DROPFOLDER}"
 echo SOURCES FOLDER		= "${SOURCESFOLDER}"
 echo VIRTUAL MACHINE		= "${VIRTUALMACHINE}"
+echo PWD		= "${TOMPWD}"
 
 # Delete previous blobs Usage: storage blob delete [options] [container] [blob]
 azure storage blob delete -q -a "${STORAGEACCOUNT}" -k "${STORAGEKEY}" "${CONTAINER}" "integration-service-0.1.0.jar"
