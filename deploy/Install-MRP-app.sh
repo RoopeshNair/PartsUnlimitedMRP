@@ -55,7 +55,7 @@ sed -i s/8080/9080/g /etc/tomcat7/server.xml
 
 mv /etc/tomcat7/tomcat-users.xml /etc/tomcat7/tomcat-users.xml.bak
 
-cat /etc/tomcat7/tomcat-users.xml.bak | awk '{ x[NR] = $0 } END { for ( i=1 ; i<=NR ; i++ ) { if (x[i] ~ /<user username="tomcat"/ ) {x[i]="--><user username=\"tomcat\" password=\"P2ssw0rd\" roles=\"tomcat,manager-gui,admin-gui\"/><!--"}print x[i] }} ' > tomcat-users.xml
+cat /etc/tomcat7/tomcat-users.xml.bak | awk '{ x[NR] = $0 } END { for ( i=1 ; i<=NR ; i++ ) { if (x[i] ~ /<user username="tomcat"/ ) {x[i]="--><user username=\"tomcat\" password=\"P2ssw0rd\" roles=\"tomcat,manager-gui,manager-script,admin-gui\"/><!--"}print x[i] }} ' > tomcat-users.xml
 
 mv ./tomcat-users.xml /etc/tomcat7/
 
