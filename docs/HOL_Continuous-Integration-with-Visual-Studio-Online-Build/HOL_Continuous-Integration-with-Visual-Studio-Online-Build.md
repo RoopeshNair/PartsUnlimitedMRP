@@ -58,27 +58,35 @@ page**:
 These credentials will be used when interacting with the git repository from the
 command line.
 
-**4.** Clone the **PartsUnlimitedMRP** git repository located here:
 
-<https://github.com/Microsoft/PartsUnlimitedMRP.git>
+**4.** Clone the **PartsUnlimitedMRP** git repository located in GitHub:
+
+    git clone https://github.com/Microsoft/PartsUnlimitedMRP.git
 
 ![](<media/clone_mrp.png>)
 
-**NOTE:** you must install Git before you can run Git clone from the command line. Download and install Git from here: [https://git-scm.com/](https://git-scm.com/ "https://git-scm.com/")
+**NOTE:** If you are running Linux on your local workstation install git:
+
+    sudo apt-get install git
+	
+**NOTE:** If you are running Windows, you can install the git client from here:
+
+	http://git-scm.com/download
 
 **5.** Add your Visual Studio Online repository as a new remote called **vso** and push to it
-your Visual Studio Online account
+your Visual Studio Online account. While pushing, use the user name (secondary) and password you have created when enabling alternate authentication credentials earlier in the lab.
 
+	cd PartsUnlimitedMRP/
 	git remote add vso <url_to_repository>
 	git push -u vso --all
-
+	
 ![](<media/push_to_vso.png>)
 
 **NOTE:** we added the Visual Studio Online repository as a remote named **vso**, so we need to
 push to that remote in the future for our changes to appear in our Visual Studio Online
 repository.
 
-**6.** Your Visual Studio Online account should not have a copy of the PartsUnlimitedMRP
+**6.** Your Visual Studio Online account should now have a copy of the PartsUnlimitedMRP
 application:
 
 ![](<media/mrp_in_vso.png>)
@@ -120,10 +128,15 @@ that was chosen for SSH access.
 **7.** If you are on **Ubuntu 14.04**, run these commands; otherwise, **ignore
 this step**:
 
+Press [ENTER] to continue when asked after the first command.
+
 	sudo add-apt-repository ppa:openjdk-r/ppa
 	sudo apt-get update
 
 **8.** Copy and paste the following snippet to **run these commands**:
+
+	# Install git client
+	sudo apt-get install git
 
 	# Install Gradle, Java, and MongoDB
 	sudo apt-get install gradle -y
@@ -135,7 +148,7 @@ this step**:
 	
 	# Install node and npm
 	curl --silent --location https://deb.nodesource.com/setup_0.12 | sudo bash -
-	sudo apt-get install nodejs npm -y
+	sudo apt-get install -y nodejs
 
 **9.** Our build server is ready to install a build agent on it, but first we
 need to create a new build agent pool. Go to your **account home page**:
@@ -153,10 +166,20 @@ page
 
 ![](<media/agent_pool_details.png>)
 
-**13.** We are not ready to install the agent installer once globally on our
-build machine. This doesn't install an agent, it simply pulls down the agent
+**12.1.** Go to the newly created pool “**linux**”, expand it, and
+add your **Alternate authentication credentials** (created earlier, step 3 - Set up your Visual Studio Online account)  to a groups **Agent Pool Service Accounts**  and **Agent Pool Administrators**
+
+![](<media/vso_agent_pool.png>)
+
+**NOTE:** membership at "Agent Pool Administrators group" **allows adding agent to pool** while "Agent Pool Service Accounts" **allows the agent to listen to the build queue**.
+
+
+
+**13.** We are now ready to install the agent installer. This doesn't install an agent, it simply pulls down the agent
 installer. Go back to the ssh session, and **enter these commands** to install
 the Visual Studio Online agent installer:
+
+**NOTE:** Do not change $USER with your user, keep it as $USER.
 
 	sudo npm install vsoagent-installer -g
 	sudo chown -R $USER ~/.npm
@@ -170,8 +193,7 @@ the Visual Studio Online agent installer:
 
 This installs the agent to the directory **~/myagent**.
 
-**15.** The first time we run the agent, it will be configured. Run the agent
-with the following command:
+**15.** The first time we run the agent, it will be configured. Run the agent with the following command:
 
 	node agent/vsoagent
 
@@ -238,8 +260,11 @@ Set the **Working Directory** to the following location:
 
 **7.** Select the second Gradle task and **edit the task name** to say
 *OrderService* and set the **Gradle Wrapper** to the following location:
+(NOTE: set the Options to **-x text** as the test have external dependencies on a mongo database.)
 
 	src/Backend/OrderService/gradlew
+	-x test
+	
 
 Set the **Working Directory** to the following location:
 
@@ -279,21 +304,25 @@ with the following:
 
 ![](<media/build_ci_trigger.png>)
 
-**12.** Click **Save**, give the build definition a name (i.e.
+**12.** Click **General**, set the default queue to the previously created queue (**linux**)
+
+![](<media/build_general.png>)
+
+**13.** Click **Save**, give the build definition a name (i.e.
 *PartsUnlimitedMRP.CI*), and then click **Ok**
 
 ![](<media/build_save.png>)
 
-**13.** Go to the **Code** tab, select the **index.html** file located at
-src/Clints/Web, and click **Edit**
+**14.** Go to the **Code** tab, select the **index.html** file located at
+src/Clients/Web, and click **Edit**
 
 ![](<media/edit_index_web.png>)
 
-**14.** Change the **Parts Unlimited MRP** and then
+**15.** Change the **Parts Unlimited MRP** and then
 click the **save button**.
 ![](<media/save_index.png>)
 
-**15.** This should have triggered the build definition we previously created,
+**16.** This should have triggered the build definition we previously created,
 and you should get a build summary similar to this, which includes test results:
 
 ![](<media/build_summary.png>)
