@@ -61,3 +61,12 @@ task loadBuildInformation(type: BuildInformationTask) {
 task cleanBuildInformation(type: CleanBuildInformationTask) {
     project.clean.dependsOn("cleanBuildInformation")
 }
+
+JacocoReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination "TEST-jacocoHtml"
+    }
+}
+
