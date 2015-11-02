@@ -5186,7 +5186,7 @@ html.win-hoverable .win-pivot button.win-pivot-header:hover {
 }
 .win-ui-dark {
   background-color: #000000;
-  color: #ffffff;
+  color: #bbbbbb;
 }
 .win-ui-light {
   background-color: #000000;
@@ -5194,7 +5194,7 @@ html.win-hoverable .win-pivot button.win-pivot-header:hover {
 }
 body {
   background-color: #000000;
-  color: #ffffff;
+  color: #bbbbbb;
 }
 ::selection {
   background-color: #0078d7;
@@ -5287,7 +5287,7 @@ input[type=button],
 input[type=reset],
 input[type=submit],
 button[type=submit] {
-  color: #ffffff;
+  color: #bbbbbb;
   background-color: rgba(255, 255, 255, 0.2);
   border-color: transparent;
 }
