@@ -17,7 +17,7 @@ import org.openqa.selenium.*;
 import static org.openqa.selenium.OutputType.*;
 
 
-public class dealersSeleniumTest {
+public class DealersSeleniumTest {
     FirefoxDriver wd;
     
     @Before
@@ -27,7 +27,7 @@ public class dealersSeleniumTest {
     }
     
     @Test
-    public void dealersSeleniumTest() {
+    public void DealersSeleniumTest() {
         wd.get("http://pumrpvm1.cloudapp.net:9080/mrp/");
         wd.findElement(By.cssSelector("button.launchtile")).click();
         wd.findElement(By.id("contact")).click();
