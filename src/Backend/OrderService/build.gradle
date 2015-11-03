@@ -63,23 +63,4 @@ task cleanBuildInformation(type: CleanBuildInformationTask) {
     project.clean.dependsOn("cleanBuildInformation")
 }
 
-sourceSets {
-
-   main {
-      compileClasspath = configurations.compile + configurations.compileOnly
-   }
-
-   test {
-      compileClasspath = compileClasspath + configurations.compileOnly
-   }
-
-   selenium {
-      compileClasspath = compileClasspath + configurations.compileOnly
-   }
-}
-
-task selenium(type: Test) {
-   testClassesDir = sourceSets.selenium.output.classesDir
-   classpath = sourceSets.selenium.runtimeClasspath  + files('/home/myadmin/lib')
-}
 
