@@ -13,7 +13,7 @@ buildscript {
         classpath("org.mongodb:mongo-java-driver:2.12.3")
         classpath("org.hibernate:hibernate-core:4.2.0.Final")
         classpath("org.apache.httpcomponents:httpclient:4.3.5")
-		classpath("org.seleniumhq.selenium:selenium-java:2.5.0")
+		classpath("org.seleniumhq.selenium:selenium-java:2.33.0")
 	}
 }
 
@@ -63,4 +63,23 @@ task cleanBuildInformation(type: CleanBuildInformationTask) {
     project.clean.dependsOn("cleanBuildInformation")
 }
 
+sourceSets {
+
+   main {
+      compileClasspath = configurations.compile + configurations.compileOnly
+   }
+
+   test {
+      compileClasspath = compileClasspath + configurations.compileOnly
+   }
+
+   selenium {
+      compileClasspath = compileClasspath + configurations.compileOnly
+   }
+}
+
+task selenium(type: Test) {
+   testClassesDir = sourceSets.selenium.output.classesDir
+   classpath = sourceSets.selenium.runtimeClasspath  + files('/home/myadmin/lib')
+}
 
