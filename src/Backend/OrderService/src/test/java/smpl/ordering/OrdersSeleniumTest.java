@@ -29,7 +29,7 @@ public class OrdersSeleniumTest {
         wd.findElement(By.xpath("//div[@id='launchtiles']/button[3]")).click();
         wd.findElement(By.id("comments")).click();
         wd.findElement(By.id("comments")).clear();
-        wd.findElement(By.id("comments")).sendKeys("Quotes recieved");
+        wd.findElement(By.id("comments")).sendKeys("Order recieved");
         wd.findElement(By.id("edit-tools-save")).click();
         wd.findElement(By.xpath("//section[@class='page-section']/div[2]")).click();
     }
