@@ -27,13 +27,11 @@ public class QuotesSeleniumTest {
     public void QuotesSeleniumTest() {
         wd.get("http://pumrpvm1.cloudapp.net:9080/mrp/");
         wd.findElement(By.cssSelector("label")).click();
-        if (!wd.findElement(By.id("nav-trigger")).isSelected()) {
-            wd.findElement(By.id("nav-trigger")).click();
-        }
-        wd.findElement(By.cssSelector("#element__3 > div.win-navbarcommand-button-content > div.win-navbarcommand-label")).click();
         wd.findElement(By.id("comments")).click();
         wd.findElement(By.id("comments")).clear();
-        wd.findElement(By.id("comments")).sendKeys("Quotes recieved");
+		wd.findElement(By.id("comments")).sendKeys("Quotes recieved");
+        wd.findElement(By.id("edit-tools-save")).click();
+      
     }
     
     @After
