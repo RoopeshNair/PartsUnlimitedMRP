@@ -26,12 +26,12 @@ public class QuotesSeleniumTest {
     @Test
     public void QuotesSeleniumTest() {
         wd.get("http://pumrpvm1.cloudapp.net:9080/mrp/");
-        wd.findElement(By.cssSelector("label")).click();
+        wd.findElement(By.xpath("//div[@id='launchtiles']/button[2]")).click();
         wd.findElement(By.id("comments")).click();
         wd.findElement(By.id("comments")).clear();
-		wd.findElement(By.id("comments")).sendKeys("Quotes recieved");
+        wd.findElement(By.id("comments")).sendKeys("Quotes recieved");
         wd.findElement(By.id("edit-tools-save")).click();
-      
+        wd.findElement(By.xpath("//section[@class='page-section']/div[2]")).click();
     }
     
     @After
