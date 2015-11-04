@@ -26,7 +26,7 @@ public class DeliveriesSelniumTest {
     @Test
     public void DeliveriesSelniumTest() {
         wd.get("http://pumrpvm1.cloudapp.net:9080/mrp/");
-        wd.findElement(By.xpath("//div[@id='launchtiles']/button[3]")).click();
+        wd.findElement(By.xpath("//div[@id='launchtiles']/button[4]")).click();
         wd.findElement(By.id("Address")).click();
         wd.findElement(By.id("Address")).clear();
         wd.findElement(By.id("Address")).sendKeys("Seattle");
