@@ -27,9 +27,9 @@ public class DeliveriesSelniumTest {
     public void DeliveriesSelniumTest() {
         wd.get("http://pumrpvm1.cloudapp.net:9080/mrp/");
         wd.findElement(By.xpath("//div[@id='launchtiles']/button[4]")).click();
-        wd.findElement(By.id("Address")).click();
-        wd.findElement(By.id("Address")).clear();
-        wd.findElement(By.id("Address")).sendKeys("Seattle");
+        wd.findElement(By.id("deliveryAddress")).click();
+        wd.findElement(By.id("deliveryAddress")).clear();
+        wd.findElement(By.id("deliveryAddress")).sendKeys("Seattle");
         wd.findElement(By.id("edit-tools-save")).click();
         wd.findElement(By.xpath("//section[@class='page-section']/div[2]")).click();
     }
