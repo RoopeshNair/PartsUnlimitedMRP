@@ -70,7 +70,7 @@ azure vm extension set -u "${VIRTUALMACHINE}" CustomScriptForLinux Microsoft.OST
 # azure vm extension set -v "${VIRTUALMACHINE}" CustomScriptForLinux Microsoft.OSTCExtensions 1.* -i '{"fileUris":["'$SCRIPTURI'"], "commandToExecute": "sudo bash 'Install-MRP-app.sh' -a '${STORAGEACCOUNT}' -c '${CONTAINER}'"}'
 
 
- azure vm extension set -v "${VIRTUALMACHINE}" CustomScriptForLinux Microsoft.OSTCExtensions 1.* -i '{"fileUris":["'$SCRIPTURI'"], "commandToExecute": "sudo bash 'Install-MRP-app.sh' -a '${STORAGEACCOUNT}' -c '${CONTAINER}'", "timestamp":timestamp}'
+ azure vm extension set -v "${VIRTUALMACHINE}" CustomScriptForLinux Microsoft.OSTCExtensions 1.* -i '{"fileUris":["'$SCRIPTURI'"], "commandToExecute": "sudo bash 'Install-MRP-app.sh' -a '${STORAGEACCOUNT}' -c '${CONTAINER}'", "timestamp":123456789}'
 
 
  #curl -T "${DROPFOLDER}/drop/Clients/build/libs/mrp.war" "http://pumrpvm1.cloudapp.net:9080/manager/text/deploy?path=/mrp&update=true" -u tomcat:${TOMPWD}
