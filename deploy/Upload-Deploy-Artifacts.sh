@@ -67,6 +67,10 @@ SCRIPTURI="https://$STORAGEACCOUNT.blob.core.windows.net/$CONTAINER/Install-MRP-
 echo SCRIPT URI 		= "${SCRIPTURI}"
 azure vm extension set -u "${VIRTUALMACHINE}" CustomScriptForLinux Microsoft.OSTCExtensions 1.*
 
- azure vm extension set -v "${VIRTUALMACHINE}" CustomScriptForLinux Microsoft.OSTCExtensions 1.* -i '{"fileUris":["'$SCRIPTURI'"], "commandToExecute": "sudo bash 'Install-MRP-app.sh' -a '${STORAGEACCOUNT}' -c '${CONTAINER}'"}'
+# azure vm extension set -v "${VIRTUALMACHINE}" CustomScriptForLinux Microsoft.OSTCExtensions 1.* -i '{"fileUris":["'$SCRIPTURI'"], "commandToExecute": "sudo bash 'Install-MRP-app.sh' -a '${STORAGEACCOUNT}' -c '${CONTAINER}'"}'
+
+
+ azure vm extension set -v "${VIRTUALMACHINE}" CustomScriptForLinux Microsoft.OSTCExtensions 1.* -i '{"fileUris":["'$SCRIPTURI'"], "commandToExecute": "sudo bash 'Install-MRP-app.sh' -a '${STORAGEACCOUNT}' -c '${CONTAINER}'", "timestamp":timestamp}'
+
 
  #curl -T "${DROPFOLDER}/drop/Clients/build/libs/mrp.war" "http://pumrpvm1.cloudapp.net:9080/manager/text/deploy?path=/mrp&update=true" -u tomcat:${TOMPWD}
