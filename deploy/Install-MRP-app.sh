@@ -26,13 +26,13 @@ rm -f /var/lib/partsunlimited/mrp.war*
 rm -f /var/lib/partsunlimited/ordering-service-0.1.0.jar*
 
 # Install packages
-apt-get update
-apt-get install openjdk-8-jdk -y
-apt-get install openjdk-8-jre -y
-apt-get install mongodb -y
-apt-get install tomcat7 -y
-apt-get install tomcat7-admin -y
-apt-get install wget -y
+sudo apt-get update
+sudo apt-get install openjdk-8-jdk -y
+sudo apt-get install openjdk-8-jre -y
+sudo apt-get install mongodb -y
+sudo apt-get install tomcat7 -y
+sudo apt-get install tomcat7-admin -y
+sudo apt-get install wget -y
 
 # Set Java environment variables
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
@@ -51,13 +51,13 @@ sleep 10
 mongo ordering /var/lib/partsunlimited/MongoRecords.js
 
 # Change Tomcat listening port from 8080 to 9080
-sed -i s/8080/9080/g /etc/tomcat7/server.xml
+sudo sed -i s/8080/9080/g /etc/tomcat7/server.xml
 
-mv /etc/tomcat7/tomcat-users.xml /etc/tomcat7/tomcat-users.xml.bak
+sudo mv /etc/tomcat7/tomcat-users.xml /etc/tomcat7/tomcat-users.xml.bak
 
-cat /etc/tomcat7/tomcat-users.xml.bak | awk '{ x[NR] = $0 } END { for ( i=1 ; i<=NR ; i++ ) { if (x[i] ~ /<user username="tomcat"/ ) {x[i]="--><user username=\"tomcat\" password=\"P2ssw0rd\" roles=\"tomcat,manager-gui,manager-script,admin-gui\"/><!--"}print x[i] }} ' > tomcat-users.xml
+sudo cat /etc/tomcat7/tomcat-users.xml.bak | awk '{ x[NR] = $0 } END { for ( i=1 ; i<=NR ; i++ ) { if (x[i] ~ /<user username="tomcat"/ ) {x[i]="--><user username=\"tomcat\" password=\"P2ssw0rd\" roles=\"tomcat,manager-gui,manager-script,admin-gui\"/><!--"}print x[i] }} ' > tomcat-users.xml
 
-mv ./tomcat-users.xml /etc/tomcat7/
+sudo mv ./tomcat-users.xml /etc/tomcat7/
 
 # Download the client WAR file
 #wget ${AzureResource}mrp.war -P /var/lib/partsunlimited/
@@ -66,7 +66,7 @@ mv ./tomcat-users.xml /etc/tomcat7/
 #sleep 10
 
 # Copy WAR file to Tomcat directory for auto-deployment
-/etc/init.d/tomcat7 stop
+sudo /etc/init.d/tomcat7 stop
 
 sleep 5
 
@@ -74,10 +74,10 @@ sleep 5
 #cp /var/lib/partsunlimited/mrp.war /var/lib/tomcat7/webapps
 
 # Restart Tomcat
-/etc/init.d/tomcat7 restart
+sudo /etc/init.d/tomcat7 restart
 
 # Download the Ordering Service jar from Azure storage
-wget ${AzureResource}ordering-service-0.1.0.jar -P /var/lib/partsunlimited/
+sudo wget ${AzureResource}ordering-service-0.1.0.jar -P /var/lib/partsunlimited/
 
 # Wait for 20 seconds to make sure previous step is completed
 sleep 20
