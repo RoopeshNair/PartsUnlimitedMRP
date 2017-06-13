@@ -45,7 +45,7 @@ AzureResource="https://$DropStorageAccountName.blob.core.windows.net/$DropContai
 #wget ${AzureResource}MongoRecords.js -P /var/lib/partsunlimited
 
 #copy MongoOrdering.js 
-sudo mv ./MongoRecords.js /var/lib/partsunlimted/
+sudo mv ./MongoRecords.js /var/lib/partsunlimted/MongoRecords.js
 
 # Wait for 10 seconds to make sure previous step is completed
 sleep 10
