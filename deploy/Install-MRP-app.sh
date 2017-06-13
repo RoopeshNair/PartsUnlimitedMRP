@@ -42,7 +42,10 @@ export PATH=$PATH:/usr/lib/jvm/java-8-openjdk-amd64/bin
 AzureResource="https://$DropStorageAccountName.blob.core.windows.net/$DropContainerName/"
 
 # Download MongoRecords.js from Azure blog storage
-wget ${AzureResource}MongoRecords.js -P /var/lib/partsunlimited
+#wget ${AzureResource}MongoRecords.js -P /var/lib/partsunlimited
+
+#copy MongoOrdering.js 
+sudo mv ./MongoRecords.js /var/lib/partsunlimted/
 
 # Wait for 10 seconds to make sure previous step is completed
 sleep 10
