@@ -12,3 +12,5 @@ To read more about this project, please view the [docs folder](docs).
 - Integration service - present to integrate with Parts Unlimited Website
 - Includes a Dockerfile and sample publishing profile to publish to a Docker container
 - Includes Azure RM JSON templates and PowerShell automation scripts to easily build and provision your environment
+- fixed email formatting
+- fixed 
