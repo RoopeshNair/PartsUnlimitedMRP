@@ -1,0 +1,61 @@
+# Deploy to Kubernetes
+# Build a Docker image, push to an Azure Container Registry, and deploy it to Azure Kubernetes Service.
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+- master
+
+resources:
+- repo: self
+
+variables:
+
+  # Container registry service connection established during pipeline creation - Docker Hub/ACR/...
+  dockerRegistryServiceConnection: '59e7146a-6e91-47c4-b1e3-14b3f3ae1374'
+  imageRepository: 'express-aks'
+  containerRegistryName: 'atulmakshelm.azurecr.io'
+  dockerfilePath: '**/Dockerfile'
+  tag: '$(Build.BuildId)'
+  
+  # Kubernetes Namespace
+  k8sNamespace: 'dev'
+  imagePullSecret: 'atulmakshelm-auth'
+
+  # Agent Pool Name
+  poolName: 'Hosted Ubuntu 1604'
+
+stages:
+- stage: Build
+  displayName: Build stage
+  jobs:  
+  - job: Build
+    displayName: Build job
+    pool: default
+    steps:
+    - script: echo build and push
+- stage: Deploy
+  displayName: Deploy stage
+  dependsOn: Build
+  jobs:
+  - deployment: Deploy
+    displayName: Deploy job
+    pool: default
+    environment: 'gopinathchexpressAKS.default'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - script: echo deploying
+- stage: Prod
+  displayName: Prod stage
+  dependsOn: Deploy
+  jobs:
+  - deployment: Deploy
+    displayName: Deploy job
+    pool: default
+    environment: 'expressAKS-Canary'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - script: echo deploying
