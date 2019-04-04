@@ -46,9 +46,24 @@ stages:
         deploy:
           steps:
           - script: echo deploying
-- stage: Prod
+          
+- stage: UAT
   displayName: Prod stage
   dependsOn: Deploy
+  jobs:
+  - deployment: Deploy
+    displayName: Deploy job
+    pool: default
+    environment: 'expressAKS-UAT'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - script: echo deploying
+
+- stage: Prod
+  displayName: Prod stage
+  dependsOn: UAT
   jobs:
   - deployment: Deploy
     displayName: Deploy job
