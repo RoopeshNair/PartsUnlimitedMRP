@@ -1,5 +1,5 @@
 # Deploy to Kubernetes
-# Build a Docker image, push to an Azure Container Registry, and deploy it to Azure Kubernetes Service.
+# Build a Docker image, push to an Azure Container Registry, & deploy it to Azure Kubernetes Service.
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
 trigger:
